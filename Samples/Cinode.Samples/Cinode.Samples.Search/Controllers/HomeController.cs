@@ -1,17 +1,17 @@
 ﻿using System.Threading.Tasks;
-using Cinode.Samples.Core;
-using Cinode.Samples.Core.Abstractions;
-using Cinode.Samples.Core.Options;
+using Cinode.Samples.Abstractions;
+using Cinode.Samples.Options;
 using Cinode.Samples.Search.Models;
 using Cinode.Samples.Search.Models.Builders;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
+using ControllerBase = Cinode.Samples.Controllers.ControllerBase;
 
 namespace Cinode.Samples.Search.Controllers
 {
     [Route("/")]
-    public class HomeController : Core.Controllers.ControllerBase
+    public class HomeController : ControllerBase
     {
         private readonly IApiUriHelper _uriHelper;
         public HomeController(IOptions<TokenOptions> tokenOptionsAccessor, IApiUriHelper uriHelper, IMemoryCache memoryCache) : base(tokenOptionsAccessor, uriHelper, memoryCache)

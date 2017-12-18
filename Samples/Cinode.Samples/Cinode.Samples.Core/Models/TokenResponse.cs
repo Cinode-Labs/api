@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Cinode.Samples.Core.Models
+namespace Cinode.Samples.Models
 {
     public class TokenResponse : ITokenResponse
     {

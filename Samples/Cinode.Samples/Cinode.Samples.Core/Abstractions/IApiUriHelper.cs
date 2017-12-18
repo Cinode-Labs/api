@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Cinode.Samples.Core.Abstractions
+namespace Cinode.Samples.Abstractions
 {
     public interface IApiUriHelper
     {

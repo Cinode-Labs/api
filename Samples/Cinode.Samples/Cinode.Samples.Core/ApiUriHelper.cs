@@ -1,9 +1,9 @@
 ﻿using System;
-using Cinode.Samples.Core.Abstractions;
-using Cinode.Samples.Core.Options;
+using Cinode.Samples.Abstractions;
+using Cinode.Samples.Options;
 using Microsoft.Extensions.Options;
 
-namespace Cinode.Samples.Core
+namespace Cinode.Samples
 {
     public class ApiUriHelper : IApiUriHelper
     {

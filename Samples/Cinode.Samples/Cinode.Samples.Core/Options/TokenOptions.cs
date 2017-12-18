@@ -1,4 +1,4 @@
-﻿namespace Cinode.Samples.Core.Options
+﻿namespace Cinode.Samples.Options
 {
     public class TokenOptions
     {

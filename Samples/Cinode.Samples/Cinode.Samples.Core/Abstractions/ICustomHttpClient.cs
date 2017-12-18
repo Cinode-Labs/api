@@ -1,10 +1,9 @@
-﻿
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Cinode.Samples.Core.Models;
+using Cinode.Samples.Models;
 
-namespace Cinode.Samples.Core.Abstractions
+namespace Cinode.Samples.Abstractions
 {
     public interface ICustomHttpClient
     {

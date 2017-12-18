@@ -1,6 +1,6 @@
-﻿using Cinode.Samples.Core.Abstractions;
+﻿using Cinode.Samples.Abstractions;
 
-namespace Cinode.Samples.Core
+namespace Cinode.Samples
 {
     public class CustomHttpClientWrapper
     {

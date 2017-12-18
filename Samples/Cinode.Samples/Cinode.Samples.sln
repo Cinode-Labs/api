@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinode.Samples.Search", "Cinode.Samples.Search\Cinode.Samples.Search.csproj", "{99155EA2-A812-4E2A-ADEE-969C32EA0836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinode.Samples.Search", "Cinode.Samples.Search\Cinode.Samples.Search.csproj", "{99155EA2-A812-4E2A-ADEE-969C32EA0836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cinode.Samples.Core", "Cinode.Samples.Core\Cinode.Samples.Core.csproj", "{5FF8975F-A049-4ED5-A3A6-B52001A85CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinode.Samples", "Cinode.Samples.Core\Cinode.Samples.csproj", "{5FF8975F-A049-4ED5-A3A6-B52001A85CC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

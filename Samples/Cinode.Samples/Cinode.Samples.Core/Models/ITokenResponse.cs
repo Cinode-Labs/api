@@ -1,5 +1,5 @@
 ﻿
-namespace Cinode.Samples.Core.Models
+namespace Cinode.Samples.Models
 {
     public interface ITokenResponse
     {

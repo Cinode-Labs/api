@@ -1,6 +1,5 @@
-﻿using Cinode.Samples.Core;
-using Cinode.Samples.Core.Abstractions;
-using Cinode.Samples.Core.Options;
+﻿using Cinode.Samples.Abstractions;
+using Cinode.Samples.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

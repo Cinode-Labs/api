@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cinode.Samples.Core\Cinode.Samples.Core.csproj" />
+    <ProjectReference Include="..\Cinode.Samples.Core\Cinode.Samples.csproj" />
   </ItemGroup>
 
 </Project>

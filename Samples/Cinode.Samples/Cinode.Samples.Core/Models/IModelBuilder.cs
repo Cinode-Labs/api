@@ -1,7 +1,7 @@
 ﻿
 using System.Threading.Tasks;
 
-namespace Cinode.Samples.Core.Models
+namespace Cinode.Samples.Models
 {
     public interface IModelBuilder<TModel>
     {

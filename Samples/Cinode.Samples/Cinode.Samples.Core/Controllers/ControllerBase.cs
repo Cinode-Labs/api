@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Cinode.Samples.Core.Abstractions;
-using Cinode.Samples.Core.Models;
-using Cinode.Samples.Core.Options;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
+using Cinode.Samples.Abstractions;
+using Cinode.Samples.Models;
+using Cinode.Samples.Options;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
-namespace Cinode.Samples.Core.Controllers
+namespace Cinode.Samples.Controllers
 {
     public class ControllerBase : Controller
     {

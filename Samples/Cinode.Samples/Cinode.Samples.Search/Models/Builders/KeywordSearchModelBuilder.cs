@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Cinode.Samples.Core.Abstractions;
-using Cinode.Samples.Core.Models;
+using Cinode.Samples.Abstractions;
+using Cinode.Samples.Models;
 using Newtonsoft.Json;
 
 namespace Cinode.Samples.Search.Models.Builders
