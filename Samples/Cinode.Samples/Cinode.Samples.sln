@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinode.Samples.Search", "Cinode.Samples.Search\Cinode.Samples.Search.csproj", "{99155EA2-A812-4E2A-ADEE-969C32EA0836}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinode.Samples", "Cinode.Samples.Core\Cinode.Samples.csproj", "{5FF8975F-A049-4ED5-A3A6-B52001A85CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cinode.Samples", "Cinode.Samples\Cinode.Samples.csproj", "{F5B30D7D-32FD-48EB-B11C-9824CFD75BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{99155EA2-A812-4E2A-ADEE-969C32EA0836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99155EA2-A812-4E2A-ADEE-969C32EA0836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99155EA2-A812-4E2A-ADEE-969C32EA0836}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FF8975F-A049-4ED5-A3A6-B52001A85CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FF8975F-A049-4ED5-A3A6-B52001A85CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FF8975F-A049-4ED5-A3A6-B52001A85CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FF8975F-A049-4ED5-A3A6-B52001A85CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B30D7D-32FD-48EB-B11C-9824CFD75BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B30D7D-32FD-48EB-B11C-9824CFD75BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B30D7D-32FD-48EB-B11C-9824CFD75BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B30D7D-32FD-48EB-B11C-9824CFD75BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
