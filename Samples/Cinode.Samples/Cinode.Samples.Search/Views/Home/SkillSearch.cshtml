@@ -1,0 +1,26 @@
+﻿@model SkillSearchModel
+@{
+    ViewData["Title"] = "Keyword - Search";
+}
+@if (Model != null)
+{
+    <h1>@Model.Term</h1>
+
+    if (Model.CompanyUsers?.Count > 0)
+    {
+        <ul>
+            @foreach (var companyUser in Model.CompanyUsers)
+            {
+                <li>@companyUser.Fullname - @companyUser.Title</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h2>Hittade inget :/</h2>
+    }
+}
+else
+{
+    <h1>Något gick fel</h1>
+}

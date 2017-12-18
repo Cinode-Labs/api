@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+<h2>Keyword</h2>
+@using (Html.BeginRouteForm("KeywordSearch", FormMethod.Post))
+{
+    <input type="text" autofocus="autofocus" name="term" />
+    <button type="submit">Search</button>
+}
+
+<h2>Skills</h2>
+@using (Html.BeginRouteForm("SkillSearch", FormMethod.Post))
+{
+    <input type="text" autofocus="autofocus" name="term" />
+    <button type="submit">Search</button>
+}
