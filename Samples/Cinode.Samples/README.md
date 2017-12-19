@@ -31,7 +31,7 @@ macOS: ~/.microsoft/usersecrets/cinode.samples/secrets.json
 
 ## LaunchSetting
 
-It can also help to add the following `launchSetting.json` under properties.
+It can also help to add the following `launchSetting.json` under `properties`.
 
 ```JSON
 {
