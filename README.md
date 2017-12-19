@@ -1,4 +1,4 @@
-# README
+# Cinode API
 Hello, fellow developer! We're glad you're here and interested in our API. We have put together some samples for you to get started! If you have any issues or question regarding the technically around the API please open an issue here on GitHub and we will try to help you. The API is still in Beta, so please bear with us. If you have other questions about our services please contanct us via our regular support channels.
 
 ## API Account
@@ -18,7 +18,7 @@ var basicParameter = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{accessId}:
 
 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", basicParameter);
 
-var basicResponse = await httpClient.GetAsync($"https://api.cinode.com/token");
+var basicResponse = await httpClient.GetAsync("https://api.cinode.com/token");
 
 if (basicResponse.IsSuccessStatusCode)
 {
