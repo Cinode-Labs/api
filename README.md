@@ -34,7 +34,7 @@ Response
 {"access_token": "[access_token]", "refresh_token":"[refresh_token]"}
 ```
 
-The `access_token` is valid for 120 seconds, after that you can use the `refresh_token` to retrieve a new one.
+The `access_token` is valid for `120 seconds`, after that you can use the `refresh_token` to retrieve a new one.
 
 ## Refresh token
 When the `access_token` is expired you can either retrieve a new `access_token` and `refresh_token` via the `/token` endpoint or you can `POST` the `refresh_token` to `https://api.cinode.com/token/refresh` with the following payload.
