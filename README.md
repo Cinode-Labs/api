@@ -1,5 +1,5 @@
 # Cinode API
-Hello, fellow developer! We're glad you're here and interested in our API. We have put together some samples for you to get started! If you have any issues or question regarding the technically around the API please open an issue here on GitHub and we will try to help you. The API is still in Beta, so please bear with us. If you have other questions about our services please contanct us via our regular support channels.
+Hello, fellow developer! We're glad you're here and interested in our API. We have put together some samples for you to get started! If you have any issues or question regarding the technically around the API please open an issue here on GitHub and we will try to help you. The API is still in Beta, so please bear with us. If you have other questions about our services please contact us via our regular support channels.
 
 ## API Account
 In order to connect to our token endpoint you need to create an API account (AccessId and AccessSecret). You can do this under `/account` when logged in. If you can't find it, please contact our support for activation. This will be used instead of your ordinary username and password. Every request made to the API will be made in the context of the owner of the API account and will need certain access rights to access different parts of the API.
