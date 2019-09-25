@@ -87,3 +87,34 @@ if (response.IsSuccessStatusCode)
     var result = await response.Content.ReadAsStringAsync();
 }
 ```
+
+## PHP
+Here is an example how to use `PHP` to retrieve an `access_token` and use it to `GET` active Users and list their first name.
+
+```PHP
+<?php
+
+#Change these.
+$companyId = [COMPANYID];
+$accessId = [ACCESSID]
+$accessSecret = [ACCESSSECRET];
+
+
+#Dont't change anything below here!
+$apiBaseUrl ='https://api.cinode.com';
+$tokenUrl = $apiBaseUrl.'/token';
+$usersUrl = $apiBaseUrl.'/v0.1/companies/'.$companyId.'/users/';
+
+$auth = base64_encode($accessId.':'.$accessSecret);
+$authContext = stream_context_create(['http' => ['header' => "Authorization: Basic $auth"]]);
+$tokenResponse = file_get_contents($tokenUrl, false, $authContext );
+$tokenObj = json_decode($tokenResponse);
+$access_token = $tokenObj->access_token;
+$context = stream_context_create(["http" => ["method" => "GET", "header" => "Accept: application/json\r\n" ."Authorization: Bearer $access_token\r\n"]]);
+$usersResponse = file_get_contents($usersUrl, false, $context);
+$users = json_decode($usersResponse);
+foreach ($users as $user){
+        echo $user->firstName;
+}
+?>
+```
