@@ -118,3 +118,57 @@ foreach ($users as $user){
 }
 ?>
 ```
+
+## Python
+Here is an example how to use `Python` to retrieve an `access_token` and use it to `GET` active Users and list their first name.
+
+```python
+from json import loads
+from base64 import b64encode
+from http.client import HTTPSConnection
+
+# Change these.
+company_id = [COMPANYID]
+access_id = [ACCESSID]
+access_secret = [ACCESSSECRET]
+
+# Dont't change anything below here!
+api_base_url = "api.cinode.com"
+token_url = "/token"
+token_refresh_url = "/token/refresh"
+users_url = "/v0.1/companies/{}/users/".format(company_id)
+base64_auth_string = b64encode(
+    "{}:{}".format(access_id, access_secret).encode("ascii")
+).decode("utf-8")
+
+connection = HTTPSConnection(api_base_url)
+
+connection.request(
+    method="GET",
+    url=token_url,
+    headers={
+        "Authorization": "Basic {}".format(base64_auth_string)
+    }
+)
+token_response = connection.getresponse().read()
+token = loads(token_response)
+
+access_token = token.get("access_token", None)
+
+connection.request(
+    method="GET",
+    url=users_url,
+    headers={
+        "Accept": "application/json",
+        "Authorization": "Bearer {}".format(access_token)
+    }
+)
+users_response = connection.getresponse().read()
+users = loads(users_response)
+
+if users:
+    for user in users:
+        first_name = user.get("firstName", None)
+        if first_name:
+            print(first_name)
+```
