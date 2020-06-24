@@ -4,6 +4,41 @@ Hello, fellow developer! We're glad you're here and interested in our API. We ha
 ## API Account
 In order to connect to our token endpoint you need to create an API account (AccessId and AccessSecret). You can do this under `/account` when logged in. If you can't find it, please contact our support for activation. This will be used instead of your ordinary username and password. Every request made to the API will be made in the context of the owner of the API account and will need certain access rights to access different parts of the API.
 
+## Rate limiting
+The rate limit time interval window is 2 seconds and the limit is according to the current plan set up for each company. On each request there will be response headers indicating how much you have used in the current window and how many requests are remaning. There will also be headers to indicate how many daily requests there is left.
+
+### Plans
+#### Token
+| Daily requests | Rate limit | Rate limit reset |
+| -------------- | ---------- | ---------------- |
+| 10000          | 2          | 2                |
+
+### HTTP Headers and error response codes
+
+#### Headers
+* `x-ratelimit-limit` - The maximum number of requests current `AccessId` or `CompanyId` can perform per time interval window.
+* `x-ratelimit-remaining` - The number of requests left for the time interval window. 
+* `x-ratelimit-reset` - The remaining window before the rate limit resets. This will be presented in seconds.
+* `x-route-daily-requests-left` - Indicates how many requests you can still make for this route during the ongoing day (24 hrs UTC).
+* `x-daily-requests-left` - Indicates how many requests you can still make during the ongoing day (24 hrs UTC).
+
+After one successfull request the response headers will look like this
+```
+x-ratelimit-limit: 40
+x-ratelimit-remaining: 39
+x-ratelimit-reset: 2
+x-daily-requests-left: 9999
+```
+
+#### Error response codes
+If you exceed the rate limit, our API will start rejecting your request and you will be receiving a error response with status code `HTTP 429 "Too many requests"` and with the following example body
+```JSON
+{"description":"Request limit was exceeded, please try again after 2 seconds from now","moreInfo":"https://github.com/Cinode-Labs/api#rate-limiting","status":429}
+```
+
+### Daily usage
+The daily usage is counted per Company. The `x-daily-requests-left` in the response header will indicate how many requests you can still make during the ongoing day. Some endpoints have a special rate limit and the remaining requests is indicated in the `x-route-daily-requests-left` response header. The daily limit will be reset at midnight in UTC.
+
 ## Retrieve access_token
 To access our API endpoints you need to exchange your AccessId and AccessSecret to an `access_token`. The access token is in `jwt` format and have certain properties regarding subject id, certain claims and validity.
 
