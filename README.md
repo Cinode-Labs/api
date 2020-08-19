@@ -5,10 +5,21 @@ Hello, fellow developer! We're glad you're here and interested in our API. We ha
 In order to connect to our token endpoint you need to create an API account (AccessId and AccessSecret). You can do this under `/account` when logged in. If you can't find it, please contact our support for activation. This will be used instead of your ordinary username and password. Every request made to the API will be made in the context of the owner of the API account and will need certain access rights to access different parts of the API.
 
 ## Rate limiting
-The rate limit time interval window is 2 seconds and the limit is according to the current plan set up for each company. On each request there will be response headers indicating how much you have used in the current window and how many requests are remaning. There will also be headers to indicate how many daily requests there is left.
+The rate limit time interval window is 2 seconds and the limit is according to the current plan set up for each company. If you have administrator access you can see the exact plan of your company in Cinode, under Administration > API. 
 
-### Plans
-#### Token
+On each request there will be response headers indicating how much you have used in the current window and how many requests are remaning. There will also be headers to indicate how many daily requests there is left.
+
+### Default plan
+These limits affect most endpoints
+
+| Daily requests | Rate limit | Rate limit reset |
+| -------------- | ---------- | ---------------- |
+| 10000          | 20         | 2                |
+
+#### Exceptions outside the scope of the plan
+Some endpoints are not affected by your plan, but have a hard limit instead.
+
+##### /token
 | Daily requests | Rate limit | Rate limit reset |
 | -------------- | ---------- | ---------------- |
 | 10000          | 2          | 2                |
