@@ -5,15 +5,24 @@ Hello, fellow developer! We're glad you're here and interested in our API. We ha
 In order to connect to our token endpoint you need to create an API account (AccessId and AccessSecret). You can do this under `/account` when logged in. If you can't find it, please contact our support for activation. This will be used instead of your ordinary username and password. Every request made to the API will be made in the context of the owner of the API account and will need certain access rights to access different parts of the API.
 
 ## Rate limiting
-The rate limit time interval window is 2 seconds and the limit is according to the current plan set up for each company. On each request there will be response headers indicating how much you have used in the current window and how many requests are remaning. There will also be headers to indicate how many daily requests there is left.
+The rate limit time interval window is 2 seconds and the limit is according to the current plan set up for each company. If you have administrator access you can see the exact plan of your company in Cinode, under `Administration > API`. If you are in need of more requests we can upgrade your plan, please contact our support for more information.
 
 ### Plans
+
+#### Default
+| Daily requests | Rate limit | Rate limit reset |
+| -------------- | ---------- | ---------------- |
+| 10000          | 40          | 2                |
+
 #### Token
+The `/token` have a limit based on `AccessId` instead of per `Company` and your plan is not affected by thoose requests.
+
 | Daily requests | Rate limit | Rate limit reset |
 | -------------- | ---------- | ---------------- |
 | 10000          | 2          | 2                |
 
 ### HTTP Headers and error response codes
+On each request there will be response headers indicating how much you have used in the current window and how many requests are remaning. There will also be headers to indicate how many daily requests there is left.
 
 #### Headers
 * `x-ratelimit-limit` - The maximum number of requests current `AccessId` or `CompanyId` can perform per time interval window.
