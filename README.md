@@ -53,6 +53,9 @@ To access our API endpoints you need to exchange your AccessId and AccessSecret 
 
 To retrieve access and refresh token make a `GET` request to `https://api.cinode.com/token` with `Authentication: Basic` in the header. AccessId and AccessSecret must be in the following format "accessId:accessSecret" and be `base64`. In return you will get a `json` object with `access_token` and `refresh_token`.
 
+## Retrieve access_token using Postman
+To retrieve access and refresh token in Postman, create a new GET request to `https://api.cinode.com/token` with Basic Authentication and write **AccessId** in **Username** textbox, and **AccessSecret** in **Password** textbox. In return you will get a `json` object with `access_token` and `refresh_token`.
+
 Example using `HttpClient` in C#
 ```C#
 private static HttpClient httpClient = new HttpClient();
