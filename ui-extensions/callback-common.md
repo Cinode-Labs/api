@@ -66,7 +66,7 @@ For example, any callback triggered from an `itemActions` in a `table` panel, wi
 
 Depending on the type of callback, different properties are expected. See specific topics for details.
 
-The bare minimum response is simply a `200 OK` and an empty json object.  
+The bare minimum response is simply a `200 OK` and an empty JSON object.  
 The end-user is notified with a generic success confirmation message.
 
 ```http

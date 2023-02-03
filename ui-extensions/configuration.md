@@ -1,8 +1,8 @@
 # Extensions configuration
 
-The extensions configuration is written in JSON and declares what parts of Cinode you want to extend, and where you've implemented your callbacks driving your extensions.
+The extensions configuration is written in JSON and declares what parts of Cinode you want to extend, and where your integration is hosted.
 
-Configuration is static and declared with along side your application registration.
+The JSON configuration is located in under the `Extensibility` tab on your apps registration page.
 
 ## Schema
 
@@ -14,20 +14,20 @@ This example demonstrates currently implemented extension points.
 
 ```json
 {
-    // Extend Cinode with interactive UI elements.
+    
     "ui": { 
 
-        // Specifically the project pages. 
+        // Extend the project page with UI elements.
         "project": { 
 
-            // Array of `Menu actions`; actions accessible from the main page menu.
+            // Array of `Menu actions`; actions accessible from the main entity page menu.
             "menu": [], 
 
-            // Map of tabs/sub-pages and panels to add.
             "panels": {
-                
-                // Array of `Panels`; extending the "overview" sub-page.
+      
+                // Panels under the overview tab.
                 "overview": []
+
             }
         }
     }
@@ -54,7 +54,7 @@ This example demonstrates currently implemented extension points.
     "style": "neutral",
 
     // `Action callback`; defines what type of behaviour this actin implements, and where to invoke the extension via HTTP.
-    "action": {},
+    "action": {}
 }
 ```
 
@@ -82,29 +82,29 @@ This example demonstrates currently implemented extension points.
 
 #### Table item actions
 
-Triggered item action callbacks will contain an additional `context` property called `item`.
+Triggered item action callbacks will contain an additional property `context.item`.
 
 The item context property contains the entire row item as-is from the data source response.
 
-For example, given the following data response, and an action triggered on the second item:
+For example, consider the following data response:
 
 ```json
 {
     "data" {
         "properties": {...},
         "values": [
-            { "myValue": 1, "someOtherValue": "123" }, 
-            { "myValue": 2, "someOtherValue": "abc" } // <-- Action triggerd on this item
+            { "myValue": 2, "someOtherValue": "abc" }
         ]
     }
 }
 ```
 
-Results in this context:
+Any `itemActions` triggered on this item will produce a context like this: 
+
 ```json
 {
     "context": {
-        "project": { ... }, // The common entity identifier
+        "project": { "id": ... },
         "item": { "myValue": 2, "someOtherValue": "abc" } 
     }
 }

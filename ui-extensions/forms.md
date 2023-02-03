@@ -38,35 +38,117 @@ A form definition consists of a `title`, `description`, a map of elements called
     ]
 }
 ```
+### Element rows
 
-### Element properties
-
-Properties applicability depends on the element type.
+Used for grouping related `elements` into rows.
 
 ```json
 {
-    "$type": "", // input, textarea, etc.
+    "form": {
+        "el1": {...},
+        "el2": {...},
+        "el3": {...},
+        "el4": {...},
+        "el5": {...},
+        "el6": {...},
+        "el7": {...},
+        "el8": {...}
+    },
 
-    "label": "",
-    "description": "",
-    "placeholder": "",
+    "rows": [
+        { "elements": ["el1", "el2"] },
+        { "elements": ["el3", "el4"] },
+        { "elements": ["el5", "el6", "el7"] }
+        // "el8" and all other non-grouped elements will be displayed last as single element groups.
+    ]
+}
+```
 
-    "required": false, // optional, defaults to false
-    "readonly": false, // optional, defaults to false
+## Elements
 
-    // Values for multiple choice elements
+**Common element properties**
+
+> See [Standard elements](#standard-elements) and [Visual elements](#visual-elements)
+
+|        Name | Description                                                         | Required |
+| ----------: | ------------------------------------------------------------------- | :------: |
+|       $type | `string` - Element type name                                        |  **X**   |
+|       label | `LocalizedString`                                                   |  **X**   |
+| description | `LocalizedString`                                                   |          |
+| placeholder | `LocalizedString`                                                   |          |
+|    required | `bool` - Requires a user to provide a `value` <sup>1</sup>          |          |
+|    readonly | `bool` - Do not allow user to modify `value` <sup>1</sup>           |          |
+|   dependsOn | `DependsOnExpression` [Element dependencies](#Element-dependencies) |          |
+|       value | `string` - Some elements assumes special formatting                 |          |
+
+> <sup>1</sup> Always validate user-input
+
+### Standard elements
+
+ - input
+ - textarea
+ - date
+ - time
+ - datetime
+ - password
+ - select
+ - radioGroup
+ - checkboxes
+
+#### date, time, and datetime
+
+```json
+{
+    "$type": "date",
+    "value": "2022-05-11" // ISO 8601
+}
+```
+```json
+{
+    "$type": "time",
+    "value": "12:30:00" // ISO 8601
+}
+```
+```json
+{
+    "$type": "datetime",
+    "value": "2022-05-11T12:30:00" // ISO 8601
+}
+```
+
+#### select, radioGroup, and checkboxes
+
+```json
+{
+    "$type": "select", // or "radioGroup",
     "values": [
         { "label": "First value", "value": "first-value" },
         { "label": "Second value", "value": "second-value" }
     ],
-
-    // Initial value of the element. Data type depends on element.
-    "default": null,
-
-    // Array of conditions.
-    "dependsOn": []
+    "value": "first-value" // the "value" from a values tuple.
 }
 ```
+```json
+{
+    "$type": "checkboxes",
+    "values": [
+        { "label": "First value", "value": "first-value" },
+        { "label": "Second value", "value": "second-value" },
+        { "label": "Third value", "value": "third-value" }
+    ],
+    "value": ["first-value", "third-value"] // Array of "value" from a values tuple.
+}
+```
+
+### Visual elements
+
+These are elements that do not carry any value and are purely intended for structuring your forms visually.
+
+ - header
+ - separator
+
+They also respect the `dependsOn` property.
+
 
 ### Element dependencies
 
@@ -84,7 +166,7 @@ Element value must equal the criteria value.
 {
     "separateBillingAddress": {
         "$type": "checkbox",
-        "default": false
+        "value": false
     },
 
     "shippingAddress": {
@@ -110,169 +192,17 @@ Element value must equal one of the criteria values.
             { "label": "Sweden", "value": "sv" },
             { "label": "Norway", "value": "no" },
             { "label": "Finland", "value": "fi" },
-            { "label": "Denmark", "value": "dk" }
-        ],
-        "default": "no"
+            { "label": "Denmark", "value": "dk" },
+            { "label": "United Kingdom", "value": "uk" },
+            { "label": "United States", "value": "us" }
+        ]
     },
 
-    "messageToDenmark": {
+    "extraDetails": {
         "$type": "text",
-        "label": "Better luck next life.",
-        "dependsOn": [{ "valueIn": { "element": "country", "value": ["sv", "no", "fi"] } }]
+        "label": "Extra information",
+        "description": "Countries outside of Scandinavia are required to provide more details",
+        "dependsOn": [{ "valueIn": { "element": "country", "value": ["sv", "no", "fi", "dk"] } }]
     }
-}
-```
-
-### Element rows
-
-Used for grouping related elements into rows. Each group have a required collection of element names, `elements`.
-
-```json
-{
-    "form": {
-        "el1": {...},
-        "el2": {...},
-        "el3": {...},
-        "el4": {...},
-        "el5": {...},
-        "el6": {...},
-        "el7": {...},
-        "el8": {...}
-    },
-
-    "rows": {
-        { "elements": ["el1", "el2"] },
-        { "elements": ["el3", "el4"] },
-        { "elements": ["el5", "el6", "el7"] }
-        // "el8" and all other non-grouped elements will be displayed last as single element groups.
-    }
-}
-```
-
-## Standard elements
-
-### input
-
-```json
-{
-    "$type": "input",
-    "default": "string"
-}
-```
-
-### textarea
-
-```json
-{
-    "$type": "textarea",
-    "default": "a long string string"
-}
-```
-
-### date
-
-```json
-{
-    "$type": "date",
-    "default": "2022-05-11" // ISO 8601
-}
-```
-
-### time
-
-```json
-{
-    "$type": "time",
-    "default": "12:30:00" // ISO 8601
-}
-```
-
-### datetime
-
-```json
-{
-    "$type": "datetime",
-    "default": "2022-05-11T12:30:00" // ISO 8601
-}
-```
-
-### password
-
-```json
-{
-    "$type": "password",
-    "default": ""
-}
-```
-
-### select
-
-```json
-{
-    "$type": "select",
-    "values": [
-        { "label": "First value", "value": "first-value" },
-        { "label": "Second value", "value": "second-value" }
-    ],
-    "default": "first-value" // the "value" from a values tuple.
-}
-```
-
-### radio-group
-
-```json
-{
-    "$type": "radio-group",
-    "values": [
-        { "label": "First value", "value": "first-value" },
-        { "label": "Second value", "value": "second-value" }
-    ],
-    "default": "first-value" // the "value" from a values tuple.
-}
-```
-
-### checkboxes
-
-```json
-{
-    "$type": "checkboxes",
-    "values": [
-        { "label": "First value", "value": "first-value" },
-        { "label": "Second value", "value": "second-value" },
-        { "label": "Third value", "value": "third-value" }
-    ],
-    "default": ["first-value", "third-value"] // Array of "value" from a values tuple.
-}
-```
-
-## Visual elements
-
-These are elements that do not carry any value and are purely intended for structuring your forms visually.
-
-They also respect the `dependsOn` property.
-
-### header
-
-```json
-{
-    "$type": "header",
-    "label": ""
-}
-```
-
-### text
-
-```json
-{
-    "$type": "text",
-    "label": ""
-}
-```
-
-### separator
-
-```json
-{
-    "$type": "separator"
 }
 ```
