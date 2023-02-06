@@ -2,7 +2,7 @@
 
 The extensions configuration is written in JSON and declares what parts of Cinode you want to extend, and where your integration is hosted.
 
-The JSON configuration is located in under the `Extensibility` tab on your apps registration page.
+The JSON configuration is located under the `Extensibility` tab on your app's registration page.
 
 ## Schema
 

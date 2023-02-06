@@ -1,6 +1,8 @@
 # Common callback semantics
 
-When talking about callbacks, the term _request_ and _response_ refers to the HTTP message sent from Cinode to the integration and the following response back.
+Callbacks are the core of Cinode extensions.
+
+> When talking about callbacks, the term _request_ and _response_ refers to the HTTP message sent from Cinode to the integration and the following response back.
 
 ## Common request structure
 
@@ -78,12 +80,12 @@ Content-Type: application/json
 
 #### 'message' object
 
-A `message` object can be included to customize the confirmation message. A link can also be included to some externally created or updated resource.
+A `message` object can be included to customize the confirmation message. A link can also be included to some externally created or updated resources.
 
 The `style` property controls how the message is displayed.
 
--   `flash` shows the message and link as a non-invasive message. Used when a successful operation don't require the end-users immediate attention.
--   `popup` show the message in a very invasive popup requiring the end-user to confirm the message.
+-   `flash` shows the message and link as a non-invasive message. Used when a successful operation doesn't require the end-user's immediate attention. 
+-   `popup` shows the message in a very invasive popup requiring the end-user to confirm the message.
 
 ```http
 HTTP/1.1 200 OK
@@ -108,9 +110,9 @@ Content-Type: application/json
 
 ### Handling failures
 
-Errors are communicated back with an HTTP status code indicating the type of error. Depending on the type of action, this will determine the UI behavior. See specific topics for details.
+Errors are communicated back with an HTTP status code indicating the type of error. Depending on the type of action, will determine the UI behavior. See specific topics for details.
 
-Use the `error` object to customize the error message displayed to the end-user. A generic "Action failed for an unknown reason" error message is shown if not specified. Some actions have specific behaviors for errors.
+Use the `error` object to customize the error message displayed to the end-user's. A generic "Action failed for an unknown reason" error message is shown if not specified. Some actions have specific behaviors for errors.
 
 Respond with a `400 Bad Request` for user errors like invalid configuration or bad input.
 
