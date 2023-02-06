@@ -1,10 +1,8 @@
-# Common callback semantics
+# Callback semantics
 
-Callbacks are the core of Cinode extensions.
+Extension behaviors are implemented via HTTP callbacks.
 
-> When talking about callbacks, the term _request_ and _response_ refers to the HTTP message sent from Cinode to the integration and the following response back.
-
-## Common request structure
+## Callback request
 
 All callbacks are invoked with these headers.
 
@@ -16,7 +14,7 @@ All callbacks are invoked with these headers.
 | `X-Cinode-Company-Id` | `companyId` of the company that triggered the callback    |
 | `X-Cinode-User-Id`    | `companyUserId` of the user who triggered the callback    |
 
-All callbacks can be verified to ensure it originates from Cinode tamper free. See [security.md](./security.md) for more info.
+All callbacks can be verified to ensure it originates tamper-free from Cinode. See [security.md](./security.md) for more info.
 
 ```http
 POST /some/callback/handler/endpoint HTTP/1.1
@@ -28,35 +26,28 @@ X-Cinode-User-Id: 123
 ```
 ```json
 {
-    // Triggered in company
     "company": {
         "id": 123,
         "name": "Sven Svenssons IT-Firma"
     },
-
-    // Triggered by user.
     "user": {
         "id": 123,
         "email": "sven@svensvensson.se",
-        "name": "Sven Svensson",
-        "language": "en-GB"
+        "name": "Sven Svensson"
     },
-
-    "action": {
-        "event": "submit" // submit, form, data
-    },
-
     "context" : {
-        // Identifies the entity this callback is triggered from.
-        // Key is the <entity name> correlateing with the extensions configuration json, $.ui.<entity name>.[panels|menu].
         "project": { "id": 123 },
-
-        // Action specific context properties
     }
-
-    // Action specific properties
 }
 ```
+
+### Common callback properties
+
+| Property               | Description                                                     |
+| ---------------------- | --------------------------------------------------------------- |
+| `company`              | The company (tenant) the callback was triggered from.           |
+| `user`                 | User of said company who triggered the callback.                |
+| `context[entity-name]` | Subject identifiers. *entity-name* depends on the subject type. |
 
 ### Context
 
@@ -64,28 +55,36 @@ All callbacks have a `context` property. At the very least it contains the Cinod
 
 For example, any callback triggered from an `itemActions` in a `table` panel, will contain an additional `item` context property identifying the subject item. See [Table item actions](./configuration.md#table-item-actions).
 
-## Response
+## Callback response
+
+Responses must be formatted as JSON, and include a `Content-Type: application/json` header. HTTP status codes indicate success or failure.
+
+| HTTP Status       | Description                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| `200 OK`          | *Success*.                                                         |
+| `400 Bad Request` | *User error*. E.g. app not configured, or invalid user/form input. |
+| `5xx`             | *Fatal error*. Response body is ignored.                           |
 
 Depending on the type of callback, different properties are expected. See specific topics for details.
 
-The bare minimum response is simply a `200 OK` and an empty JSON object.  
-The end-user is notified with a generic success confirmation message.
+### Responding with Success
 
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
+For `200 OK` responses.
 
-{}
-```
+A `message` object can be included to customize the confirmation message. Use `message.style` to controls how the message is displayed.
 
-#### 'message' object
+- `flash` shows the message and link as a non-invasive message, Used when a successful operation doesn't require the end-user's immediate attention. 
+- `popup` shows the message in a very invasive popup requiring the end-user to confirm the message.
 
-A `message` object can be included to customize the confirmation message. A link can also be included to some externally created or updated resources.
+#### 'message' properties
 
-The `style` property controls how the message is displayed.
-
--   `flash` shows the message and link as a non-invasive message. Used when a successful operation doesn't require the end-user's immediate attention. 
--   `popup` shows the message in a very invasive popup requiring the end-user to confirm the message.
+| Property     | Type                 | Description                           |
+| ------------ | -------------------- | ------------------------------------- |
+| `value`      | Localized string     | Message to display                    |
+| `style`      | `flash`, `popup`     | Defaults to `flash`                   |
+| `link`       | Optional link object | Eg. created/updated resource location |
+| `link.label` | Localized string     |                                       |
+| `link.url`   | URL                  |                                       |
 
 ```http
 HTTP/1.1 200 OK
@@ -96,10 +95,8 @@ Content-Type: application/json
     "message": {
         "value": { "en": "Thing created!" },
         
-        // Optional, default is "flash"
         "style": "popup",
 
-        // Optional
         "link": { 
             "label": {"en": "Show thing" },
             "url": "https://example.com/thing"
@@ -108,46 +105,31 @@ Content-Type: application/json
 }
 ```
 
-### Handling failures
+### Responding with Failure
 
-Errors are communicated back with an HTTP status code indicating the type of error. Depending on the type of action, will determine the UI behavior. See specific topics for details.
+> `5xx` responses are assumed to be out of the app's control and treated as intermittent errors. 
+> Request will be retried at least once before notifying the user.
 
-Use the `error` object to customize the error message displayed to the end-user's. A generic "Action failed for an unknown reason" error message is shown if not specified. Some actions have specific behaviors for errors.
+Errors are communicated back with an HTTP status code indicating the type of error. The specific UI behavior depends on the type of action being performed. See specific topics for details.
 
-Respond with a `400 Bad Request` for user errors like invalid configuration or bad input.
+A `400 Bad Request` response indicates a user error and may include an `error` property to customize the error message show to the users. A generic error message is shown if not specified. It's *always recommended* to communicate the issue and how to resolve it.
+
+#### 'error' properties
+
+| Property | Type             | Description      |
+| -------- | ---------------- | ---------------- |
+| `value`  | Localized string | Error to display |
+
 
 ```http
 HTTP/1.1 400 Bad Request
 Content-Type: application/json
 ```
+
 ```json
 {
     "error": {
-        "value": "Could not share project with #missing-chanel, because channel was not found."
+        "value": { "en": "Could not share project with #missing-chanel - Channel was not found." }
     }
 }
 ```
-
-Respond with any `5xx` for server errors or intermittent errors. The end-user is presented with the error and an option to retry the same action.
-
-```http
-HTTP/1.1 503 Service Unavailable
-Content-Type: application/json
-
-{
-    "error": {
-        "value": "Slack is unable to process the request at the moment."
-    }
-}
-```
-
-### HTTP Status codes
-
--   Status `200 OK`  
-    Indicates success.
-
--   Status `400 Bad Request`
-    User error, like invalid app configuration, or failed form validation.
-
--   Status `5xx`  
-    Notify user of error and option to try again.
