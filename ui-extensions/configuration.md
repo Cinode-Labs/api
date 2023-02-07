@@ -1,12 +1,12 @@
 # Extensions configuration
 
-The extensions configuration is written in JSON and declares what parts of Cinode you want to extend, and where your integration is hosted.
+The extensions configuration is the entry point to Cinode extensions. It's written in JSON and declares what parts of Cinode you want to extend, and how to communicate with your implementation.
 
 The JSON configuration is located under the `Extensibility` tab on your app's registration page.
 
-## Schema
+## Base configuration
 
-> This schema is available in as a JSONSchema: [schema.json](schema.json).
+> This schema is also available as a JSONSchema - [schema.json](schema.json).
 
 The configuration structure declares what extension points you want to extend, and how they are extended.
 
@@ -16,16 +16,9 @@ This example demonstrates currently implemented extension points.
 {
     
     "ui": { 
-
-        // Extend the project page with UI elements.
         "project": { 
-
-            // Array of `Menu actions`; actions accessible from the main entity page menu.
-            "menu": [], 
-
+            "menu": [],
             "panels": {
-      
-                // Panels under the overview tab.
                 "overview": []
 
             }
@@ -34,7 +27,14 @@ This example demonstrates currently implemented extension points.
 }
 ```
 
-### Menu actions
+| Property                          | Type                                   | Description                                  |
+| --------------------------------- | -------------------------------------- | -------------------------------------------- |
+| `ui[entity-name].menu`            | Array of [Menu actions](#menu-actions) | Actions to add to the entity menu menu       |
+| `ui[entity-name].panels.overview` | Array of [Panels](#panels)             | Panels displayed on the entity overview page |
+
+
+
+## Menu actions
 
 ```json
 {
@@ -42,45 +42,49 @@ This example demonstrates currently implemented extension points.
         "en": "English label",
         "sv": "Svensk etikett"
     },
-
     "name": "unique-name",
-    
-    // Show a pre-defined icon to futher communicate intent, if applicable.
-    // Posible values: add, delete, edit, or unspecified (default)
     "icon": "unspecified",
-
-    // Visually highlight your menu action to further comunicate impact, if applicable.
-    // Posible values: positive, warning, neutral (default)
     "style": "neutral",
-
-    // `Action callback`; defines what type of behaviour this actin implements, and where to invoke the extension via HTTP.
     "action": {}
 }
 ```
 
-### Table panel 
+| Property | Type                                   | Description                                                             |
+| -------- | -------------------------------------- | ----------------------------------------------------------------------- |
+| `name`   | *Unique name*                          | Unique internal menu item name/identifier                               |
+| `label`  | *Localized string*                     |                                                                         |
+| `icon`   | `add`, `delete`, `edit`, `unspecified` | Pre-defined icon to visually communicate intent. Default `unspecified`. |
+| `style`  | `positive`, `warning`, `neutral`       | Visual highlight to communicate impact. Default `neutral`.              |
+| `action` | *Action callback*                      |                                                                         |
+
+## Panels
+
+### Table panel
 
 ```json
 {
-    // Must be "table"
     "$type": "table",
     "label": { "en": "English label" },
     "description": { "en": "English description" },
     
     "name": "unique-name",
-
-    // `Data callback`; defined how data is fetched.
     "dataSource": {},
-    
-    // `Menu action`; if defined, renders a button next to the panel label.
     "primaryAction": {},
-
-    // Array of `Menu actions`; available for each item in the table.
     "itemActions": []
 }
 ```
 
-#### Table item actions
+| Property        | Type                                       | Description                                   |
+| --------------- | ------------------------------------------ | --------------------------------------------- |
+| `$type`         | "table"                                    |                                               |
+| `name`          | *Unique name*                              | Unique internal panel name/identifier         |
+| `label`         | *Localized string*                         |                                               |
+| `description`   | *Localized string*                         |                                               |
+| `dataSource`    | [Data source callback](./callback-data.md) |                                               |
+| `primaryAction` | *Action callback*                          |                                               |
+| `itemActions`   | Array of [Menu actions](#menu-actions)     | See [Table item actions](#table-item-actions) |
+
+### Table item actions
 
 Triggered item action callbacks will contain an additional property `context.item`.
 
