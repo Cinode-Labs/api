@@ -6,7 +6,7 @@ The only requirement is that your integration is implemented as an AppMarket int
 
 - [Configuration](configuration.md)
 - [Callback semantics](callbacks.md)
-  - [Basic callbacks](callback-basic.md)
-  - [Form callbacks](callback-form.md)
-  - [Data callbacks](callback-data.md)
-- [Form definition](forms.md)
+  - [Basic action](callback-basic.md)
+  - [Form action](callback-form.md)
+    - [Form definition](forms.md)
+  - [Data source](callback-data.md)

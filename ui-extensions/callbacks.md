@@ -24,6 +24,7 @@ X-Cinode-Signature: ...
 X-Cinode-Company-Id: 123
 X-Cinode-User-Id: 123
 ```
+
 ```json
 {
     "company": {
@@ -73,7 +74,7 @@ For `200 OK` responses.
 
 A `message` object can be included to customize the confirmation message. Use `message.style` to controls how the message is displayed.
 
-- `flash` shows the message and link as a non-invasive message, Used when a successful operation doesn't require the end-user's immediate attention. 
+- `flash` shows the message and link as a non-invasive message, Used when a successful operation doesn't require the end-user's immediate attention.
 - `popup` shows the message in a very invasive popup requiring the end-user to confirm the message.
 
 #### 'message' properties
@@ -90,6 +91,7 @@ A `message` object can be included to customize the confirmation message. Use `m
 HTTP/1.1 200 OK
 Content-Type: application/json
 ```
+
 ```json
 {
     "message": {
@@ -107,7 +109,7 @@ Content-Type: application/json
 
 ### Responding with Failure
 
-> `5xx` responses are assumed to be out of the app's control and treated as intermittent errors. 
+> `5xx` responses are assumed to be out of the app's control and treated as intermittent errors.
 > Request will be retried at least once before notifying the user.
 
 Errors are communicated back with an HTTP status code indicating the type of error. The specific UI behavior depends on the type of action being performed. See specific topics for details.
@@ -119,7 +121,6 @@ A `400 Bad Request` response indicates a user error and may include an `error` p
 | Property | Type             | Description      |
 | -------- | ---------------- | ---------------- |
 | `value`  | Localized string | Error to display |
-
 
 ```http
 HTTP/1.1 400 Bad Request

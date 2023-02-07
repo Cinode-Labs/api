@@ -38,6 +38,7 @@ A form definition consists of a `title`, `description`, a map of elements called
     ]
 }
 ```
+
 ### Element rows
 
 Used for grouping related `elements` into rows.
@@ -78,22 +79,22 @@ Used for grouping related `elements` into rows.
 | placeholder | `LocalizedString`                                                   |          |
 |    required | `bool` - Requires a user to provide a `value` <sup>1</sup>          |          |
 |    readonly | `bool` - Do not allow user to modify `value` <sup>1</sup>           |          |
-|   dependsOn | `DependsOnExpression` [Element dependencies](#Element-dependencies) |          |
+|   dependsOn | `DependsOnExpression` [Element dependencies](#element-dependencies) |          |
 |       value | `string` - Some elements assumes special formatting                 |          |
 
 > <sup>1</sup> Always validate user-input
 
 ### Standard elements
 
- - input
- - textarea
- - date
- - time
- - datetime
- - password
- - select
- - radioGroup
- - checkboxes
+- input
+- textarea
+- date
+- time
+- datetime
+- password
+- select
+- radioGroup
+- checkboxes
 
 #### date, time, and datetime
 
@@ -103,12 +104,14 @@ Used for grouping related `elements` into rows.
     "value": "2022-05-11" // ISO 8601
 }
 ```
+
 ```json
 {
     "$type": "time",
     "value": "12:30:00" // ISO 8601
 }
 ```
+
 ```json
 {
     "$type": "datetime",
@@ -128,6 +131,7 @@ Used for grouping related `elements` into rows.
     "value": "first-value" // the "value" from a values tuple.
 }
 ```
+
 ```json
 {
     "$type": "checkboxes",
@@ -144,11 +148,10 @@ Used for grouping related `elements` into rows.
 
 These are elements that do not carry any value and are purely intended for structuring your forms visually.
 
- - header
- - separator
+- header
+- separator
 
 They also respect the `dependsOn` property.
-
 
 ### Element dependencies
 
