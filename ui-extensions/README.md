@@ -6,7 +6,7 @@ The only requirement is that your integration is implemented as an AppMarket app
 
 ## Overview
 
-These are the steps needed to implement a Cinode extension:
+In short, these are the steps needed to implement a Cinode extension,
 
 1. Register an AppMarket app in Cinode, `Administration > Integrations > Apps > Registration`.
 2. Implement the OAuth flow and install the app into your Cinode company.
@@ -17,7 +17,9 @@ These are the steps needed to implement a Cinode extension:
 ## Reference guide
 
 - [Configuration](configuration.md)
-- [Callback semantics](callbacks.md)
+- [Callback handling](callbacks.md) 
+  - [Security](security.md)
+- Actions
   - [Basic action](callback-basic.md)
   - [Form action](callback-form.md)
     - [Form definition](forms.md)

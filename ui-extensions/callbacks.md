@@ -1,4 +1,4 @@
-# Callback semantics
+# Handling callbacks
 
 Extension behaviors are implemented via HTTP callbacks.
 
@@ -114,7 +114,7 @@ Content-Type: application/json
 
 Errors are communicated back with an HTTP status code indicating the type of error. The specific UI behavior depends on the type of action being performed. See specific topics for details.
 
-A `400 Bad Request` response indicates a user error and may include an `error` property to customize the error message show to the users. A generic error message is shown if not specified. It's *always recommended* to communicate the issue and how to resolve it.
+A `400 Bad Request` response indicates a user error and may include an `error` property to customize the error message show to the users. A generic error message is shown if not specified.
 
 #### 'error' properties
 
