@@ -1,17 +1,20 @@
 # Data source callbacks
 
-Used when data is requested, eg. when loading and reloading a table panel.
+Used when data is requested, e.g.. when loading and reloading a table panel.
 
 Calls the `dataUrl` and expects a response containing data, or an error message. Payload format depends on the component requesting the data.
 
 ## Configuration
 
 ```json
-{
-    "$type": "data",
-    "name": "unique-name",
 
-    "dataUrl": "https://example.com/api/data",
+{    
+    "dataSource": {
+        "$type": "data",
+        "name": "unique-name",
+
+        "dataUrl": "https://example.com/api/data",
+    }
 }
 ```
 
