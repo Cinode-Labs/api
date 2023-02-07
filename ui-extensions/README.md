@@ -17,11 +17,11 @@ In short, these are the steps needed to implement a Cinode extension,
 ## Reference guide
 
 - [Configuration](configuration.md)
-- [Callback handling](callbacks.md) 
+- [Callback handling](callbacks.md)
   - [Security](security.md)
-- Actions
-  - [Basic action](callback-basic.md)
-  - [Form action](callback-form.md)
+- [Actions](callback-actions.md)
+  - [Basic action](callback-actions.md#basic-callback)
+  - [Form action](callback-actions.md#form-callback)
     - [Form definition](forms.md)
   - [Data source](callback-data.md)
 - [Handling translations](translations.md)
