@@ -2,7 +2,7 @@
 
 The extensions configuration is the entry point to Cinode extensions. It's written in JSON and declares what parts of Cinode you want to extend, and how to communicate with your implementation.
 
-The JSON configuration is located under the `Extensibility` tab on your app's registration page.
+You'll find your extensions configuration with app's registration, `Administration > Integrations > Apps > Registration`.
 
 ## Base configuration
 
@@ -31,8 +31,6 @@ This example demonstrates currently implemented extension points.
 | --------------------------------- | -------------------------------------- | -------------------------------------------- |
 | `ui[entity-name].menu`            | Array of [Menu actions](#menu-actions) | Actions to add to the entity menu menu       |
 | `ui[entity-name].panels.overview` | Array of [Panels](#panels)             | Panels displayed on the entity overview page |
-
-
 
 ## Menu actions
 
