@@ -4,7 +4,7 @@ Cinode Extensions enables third-party integration developers to extend the Cinod
 
 The only requirement is that your integration is implemented as an AppMarket app.
 
-> **Note**
+> **Note**  
 > Cinode extensions are currently in *early preview* and as such lots of features are still missing.
 
 ## Overview
