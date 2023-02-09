@@ -38,7 +38,7 @@ Body has to include the following properties encoded as `application/x-www-form-
 | code         | `code` from the incoming query parameter  |
 | redirect_uri | *Callback URL* from your app registration |
 
-```plaintext
+```http
 POST /oauth/token HTTP/1.1
 Authorization: Basic <base64(ClientId:ClientSecret)
 Content-Type: application/x-www-form-urlencoded
@@ -78,7 +78,7 @@ Body has to include the following properties encoded as `application/x-www-form-
 | grant_type    | 'refresh_token'                           |
 | refresh_token | `refresh_token`                           |
 
-```plaintext
+```http
 POST /oauth/token HTTP/1.1
 Authorization: Basic <base64(ClientId:ClientSecret)
 Content-Type: application/x-www-form-urlencoded
