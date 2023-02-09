@@ -14,7 +14,6 @@ This example demonstrates currently implemented extension points.
 
 ```json
 {
-    
     "ui": { 
         "project": { 
             "menu": [],
