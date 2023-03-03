@@ -4,14 +4,14 @@ As an integration developer, you may opt-in to design your Cinode integration as
 
 Apps have access to some extra features like
 
-- AppMarket page, enabling distribution as a Turn Key integration.
-- No need to manage a dedicated/personal integration account/tokens.
-- Extend the Cinode user interface with the [Cinode Extensions](../Extensions/README.md) framework.
+- Easy distribution though our AppMarket.
+- No need for your end users to manually keep track of personal Cinode tokens.
+- Extend the Cinode user interface with the [Extensions](../Extensions/README.md) framework.
 
 ## Installing an app
 
 > **TL;DR**  
-> Cinode Apps implement *OAuth 2.0 authorization code grant* flow, with an implicit for exchanging access tokens as part of an installation process.
+> Cinode Apps implement *OAuth 2.0 authorization code grant* flow, for exchanging access tokens as part of the installation/setup process.
 > You should be able to use any compatible tool or framework as part of your implementation.
 
 ### 1. Authorizing an app
@@ -40,7 +40,7 @@ Body has to include the following properties encoded as `application/x-www-form-
 
 ```http
 POST /oauth/token HTTP/1.1
-Authorization: Basic <base64(ClientId:ClientSecret)
+Authorization: Basic <base64(ClientId:ClientSecret)>
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=authorization_code
@@ -80,7 +80,7 @@ Body has to include the following properties encoded as `application/x-www-form-
 
 ```http
 POST /oauth/token HTTP/1.1
-Authorization: Basic <base64(ClientId:ClientSecret)
+Authorization: Basic <base64(ClientId:ClientSecret)>
 Content-Type: application/x-www-form-urlencoded
 
 grant_type=refresh_token
