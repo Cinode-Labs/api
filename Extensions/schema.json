@@ -1,0 +1,319 @@
+{
+  "$ref": "#/definitions/Extensions",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "BasicUserActionCallback": {
+      "additionalProperties": false,
+      "examples": [
+        {
+          "$type": "basic",
+          "name": "basic-callback",
+          "submitUrl": "https://example.com/api/basic/submit"
+        }
+      ],
+      "properties": {
+        "$type": {
+          "const": "basic",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "submitUrl": {
+          "examples": [
+            "https://example.com/api/basic/submit"
+          ],
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type",
+        "name",
+        "submitUrl"
+      ],
+      "title": "BasicUserActionCallback",
+      "type": "object"
+    },
+    "DataSourceCallback": {
+      "additionalProperties": false,
+      "examples": [
+        {
+          "$type": "data",
+          "dataUrl": "https://example.com/api/data",
+          "name": "my-data-source"
+        }
+      ],
+      "properties": {
+        "$type": {
+          "const": "data",
+          "type": "string"
+        },
+        "dataUrl": {
+          "examples": [
+            "https://example.com/api/data"
+          ],
+          "format": "uri",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type",
+        "dataUrl",
+        "name"
+      ],
+      "title": "DataSourceCallback",
+      "type": "object"
+    },
+    "Extensions": {
+      "additionalProperties": false,
+      "properties": {
+        "ui": {
+          "$ref": "#/definitions/UiExtensions"
+        }
+      },
+      "required": [
+        "ui"
+      ],
+      "type": "object"
+    },
+    "FormUserActionCallback": {
+      "additionalProperties": false,
+      "examples": [
+        {
+          "$type": "form",
+          "formUrl": "https://example.com/api/form/definition",
+          "name": "form-callback",
+          "submitUrl": "https://example.com/api/form/submit"
+        }
+      ],
+      "properties": {
+        "$type": {
+          "const": "form",
+          "type": "string"
+        },
+        "formUrl": {
+          "examples": [
+            "https://example.com/api/form/definition"
+          ],
+          "format": "uri",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "submitUrl": {
+          "examples": [
+            "https://example.com/api/form/submit"
+          ],
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "$type",
+        "formUrl",
+        "name",
+        "submitUrl"
+      ],
+      "title": "FormUserActionCallback",
+      "type": "object"
+    },
+    "LocalizedText": {
+      "additionalProperties": false,
+      "examples": [
+        {
+          "en": "English"
+        },
+        {
+          "en": "English",
+          "sv": "Swedish"
+        }
+      ],
+      "properties": {
+        "en": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sv": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "en"
+      ],
+      "title": "LocalizedText",
+      "type": "object"
+    },
+    "TablePanel": {
+      "additionalProperties": false,
+      "examples": [
+        {
+          "$type": "table",
+          "dataSource": {
+            "$type": "data",
+            "dataUrl": "https://example.com/api/data",
+            "name": "my-table-data-source"
+          },
+          "description": {
+            "en": "Panel description"
+          },
+          "label": {
+            "en": "Panel label"
+          },
+          "name": "my-table"
+        }
+      ],
+      "properties": {
+        "$type": {
+          "const": "table",
+          "default": "table",
+          "type": "string"
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSourceCallback"
+        },
+        "description": {
+          "$ref": "#/definitions/LocalizedText"
+        },
+        "itemActions": {
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/UserAction"
+          },
+          "type": "array"
+        },
+        "label": {
+          "$ref": "#/definitions/LocalizedText"
+        },
+        "name": {
+          "type": "string"
+        },
+        "primaryAction": {
+          "$ref": "#/definitions/UserAction"
+        },
+        "whenEmpty": {
+          "$ref": "#/definitions/LocalizedText"
+        }
+      },
+      "required": [
+        "$type",
+        "dataSource",
+        "label",
+        "name"
+      ],
+      "title": "TablePanel",
+      "type": "object"
+    },
+    "UiEntityExtensions": {
+      "additionalProperties": false,
+      "properties": {
+        "menu": {
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/UserAction"
+          },
+          "type": "array"
+        },
+        "panels": {
+          "$ref": "#/definitions/UiEntityPanelExtensions"
+        }
+      },
+      "type": "object"
+    },
+    "UiEntityPanelExtensions": {
+      "additionalProperties": false,
+      "properties": {
+        "overview": {
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/TablePanel"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "UiExtensions": {
+      "additionalProperties": false,
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/UiEntityExtensions"
+        }
+      },
+      "type": "object"
+    },
+    "UserAction": {
+      "additionalProperties": false,
+      "examples": [
+        {
+          "action": null,
+          "label": {
+            "en": "English label"
+          },
+          "name": "my-action"
+        }
+      ],
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/UserActionCallback"
+        },
+        "icon": {
+          "$ref": "#/definitions/UserActionIcon"
+        },
+        "label": {
+          "$ref": "#/definitions/LocalizedText"
+        },
+        "name": {
+          "type": "string"
+        },
+        "style": {
+          "$ref": "#/definitions/UserActionStyle"
+        }
+      },
+      "required": [
+        "name",
+        "label",
+        "action"
+      ],
+      "title": "UserAction",
+      "type": "object"
+    },
+    "UserActionCallback": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/BasicUserActionCallback"
+        },
+        {
+          "$ref": "#/definitions/FormUserActionCallback"
+        }
+      ],
+      "description": "Callbacks"
+    },
+    "UserActionIcon": {
+      "default": "unspecified",
+      "enum": [
+        "unspecified",
+        "add",
+        "delete",
+        "edit"
+      ],
+      "title": "UserActionIcon",
+      "type": "string"
+    },
+    "UserActionStyle": {
+      "default": "neutral",
+      "enum": [
+        "neutral",
+        "warning",
+        "positive"
+      ],
+      "title": "UserActionStyle",
+      "type": "string"
+    }
+  }
+}
