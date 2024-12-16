@@ -6,29 +6,29 @@ A form definition consists of a `title`, `description`, a map of elements called
 
 ```json
 {
-    "title": "Title of form modal",
-    "description": "Description describing the described form",
+    "title": { "en": "Title of form modal" },
+    "description": { "en": "Description describing the described form" },
     "form": {
         "channel": {
             "$type": "select",
-            "label": "Channel",
-            "description": "Select the channel you want to post the message to.",
+            "label": { "en": "Channel" },
+            "description": { "en": "Select the channel you want to post the message to." },
             "values": [
-                {"label": "#general", "value": "C035JSCTY" },
-                {"label": "#development", "value": "C0E9NCBM0" },
-                {"label": "#customer-integrations", "value": "C021CS435NE" }
+                { "label": { "en": "#general" }, "value": "C035JSCTY" },
+                { "label": { "en": "#development" }, "value": "C0E9NCBM0" },
+                { "label": { "en": "#customer-integrations" }, "value": "C021CS435NE" }
             ]
         },
         "customMessage": {
             "$type": "textarea",
-            "label": "Custom message"
+            "label": { "en": "Custom message" }
         },
         "dance": {
             "$type": "radio-group",
-            "label" : "Add :dance: emoji?",
+            "label": { "en": "Add :dance: emoji?" },
             "values": [
-                {"label": "Yes", "value": "yes" },
-                {"label": "No", "value": "no" },
+                { "label": { "en": "Yes" }, "value": "yes" },
+                { "label": { "en": "No" }, "value": "no" }
             ]
         }
     },
@@ -125,8 +125,8 @@ Used for grouping related `elements` into rows.
 {
     "$type": "select", // or "radioGroup",
     "values": [
-        { "label": "First value", "value": "first-value" },
-        { "label": "Second value", "value": "second-value" }
+        { "label": { "en": "First value" }, "value": "first-value" },
+        { "label": { "en": "Second value" }, "value": "second-value" }
     ],
     "value": "first-value" // the "value" from a values tuple.
 }
@@ -136,9 +136,9 @@ Used for grouping related `elements` into rows.
 {
     "$type": "checkboxes",
     "values": [
-        { "label": "First value", "value": "first-value" },
-        { "label": "Second value", "value": "second-value" },
-        { "label": "Third value", "value": "third-value" }
+        { "label": { "en": "First value" }, "value": "first-value" },
+        { "label": { "en": "Second value" }, "value": "second-value" },
+        { "label": { "en": "Third value" }, "value": "third-value" }
     ],
     "value": ["first-value", "third-value"] // Array of "value" from a values tuple.
 }
@@ -192,19 +192,19 @@ Element value must equal one of the criteria values.
     "country": {
         "$type": "select",
         "values": [
-            { "label": "Sweden", "value": "sv" },
-            { "label": "Norway", "value": "no" },
-            { "label": "Finland", "value": "fi" },
-            { "label": "Denmark", "value": "dk" },
-            { "label": "United Kingdom", "value": "uk" },
-            { "label": "United States", "value": "us" }
+            { "label": { "en": "Sweden" }, "value": "sv" },
+            { "label": { "en": "Norway" }, "value": "no" },
+            { "label": { "en": "Finland" }, "value": "fi" },
+            { "label": { "en": "Denmark" }, "value": "dk" },
+            { "label": { "en": "United Kingdom" }, "value": "uk" },
+            { "label": { "en": "United States" }, "value": "us" }
         ]
     },
 
     "extraDetails": {
         "$type": "text",
-        "label": "Extra information",
-        "description": "Countries outside of Scandinavia are required to provide more details",
+        "label": { "en": "Extra information" },
+        "description": { "en": "Countries outside of Scandinavia are required to provide more details" },
         "dependsOn": [{ "valueIn": { "element": "country", "value": ["sv", "no", "fi", "dk"] } }]
     }
 }
