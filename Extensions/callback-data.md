@@ -65,7 +65,7 @@ X-Cinode-User-Id: 123
 }
 ```
 
-Response must contain a `properties`, and `values` properties. Optionally a `filters` property.
+Response must contain a `properties`, and `values` properties. Optionally a `filters` and/or `pagination` property.
 
 ```http
 HTTP/1.1 200 OK
@@ -94,6 +94,10 @@ Content-Type: application/json
             }
         },
 
+        "pagination": {
+            "$type": "client" // signals the frontend to do client-side pagination. Requires the entire filtered dataset to be returned.
+        },
+
         // Map of property names to property metadata
         "properties": {
             "recipient": { "label": "Recipient" },
@@ -106,12 +110,12 @@ Content-Type: application/json
         "values": [
             {
                 "recipient": { "value": "Bob Boston" },
-                "template": { "value": "Standard development agreement" },
+                "template": { "value": "Standard development agreement", "href": "https://example.com/standard-development-agreement" },
                 "status": { "value": "Signed" }
             },
             {
-                "recipient": { "value": "Bob Boston" },
-                "template": { "value": "Premium maintenance SLA" },
+                "recipient": { "value": "Bob Boston"  },
+                "template": { "value": "Premium maintenance SLA", "href": "https://example.com/premium-maintenance-sla" },
                 "status": { "value": "Sent" }
             }
         ]
