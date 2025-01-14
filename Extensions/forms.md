@@ -95,7 +95,7 @@ Used for grouping related `elements` into rows.
 - select
 - radioGroup
 - checkboxes
-- mutiselect
+- multiselect
 
 #### date, time, and datetime
 
