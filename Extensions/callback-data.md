@@ -27,6 +27,21 @@ Invoked when data is requested, i.e., to be displayed in a panel.
 - Respond with a `200 OK` response and a `data` object.
 - Respond with a `400 Bad Request` response to display a general error in place of the panel content.
 
+Initial load will only contain an empty object.
+
+```http
+POST /api/data HTTP/1.1
+Content-Type: application/vnd.cinode.callback.v1+json
+Digest: sha-256=...
+X-Cinode-Signature: ...
+X-Cinode-Company-Id: 123
+X-Cinode-User-Id: 123
+
+{}
+```
+
+Subsequent requests will include a `filters` property with values to filter the returned data.
+
 ```http
 POST /api/data HTTP/1.1
 Content-Type: application/vnd.cinode.callback.v1+json
@@ -36,9 +51,12 @@ X-Cinode-Company-Id: 123
 X-Cinode-User-Id: 123
 
 {
-    "filter": {
+    "filters": {
         "recipient": {
             "value": "asdasdasdasdasdas"
+        },
+        "some-complex-query": {
+            "value": "my query value"
         },
         "status": {
             "value": ["new", "completed"]
@@ -47,35 +65,40 @@ X-Cinode-User-Id: 123
 }
 ```
 
+Response must contain a `properties`, and `values` properties. Optionally a `filters` property.
+
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
     "data": {
-        // Map of property names to property metadata
-        "properties": {
-            "recipient": { "label": "Recipient" },
-            "template": { "label": "Template" },
-            "status": { "label": "Status" }
-        },
-
+        // Map of form elements to define filters and facets
         "filter": {
             "recipient": {
                 "$type": "input",
                 "label": {"en": "Recipiant name"},
-                "value": "asdasdasdasdasdas"
+            },
+            "some-complex-query": {
+                "$type": "input",
+                "label": {"en": "Query"},
             },
             "status": {
                 "$type": "multiselect",
                 "label": {"en": "Satus"},
                 "values": [
-                    {"key": "new", "label": "New"},
-                    {"key": "completed", "label": "Completed"},
-                    {"key": "removed", "label": "Removed"},
-
+                    {"value": "new", "label": "New"},
+                    {"value": "completed", "label": "Completed"},
+                    {"value": "removed", "label": "Removed"}
                 ]
             }
+        },
+
+        // Map of property names to property metadata
+        "properties": {
+            "recipient": { "label": "Recipient" },
+            "template": { "label": "Template" },
+            "status": { "label": "Status" }
         },
 
         // Array or data entry objects
