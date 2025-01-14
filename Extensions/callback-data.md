@@ -35,7 +35,16 @@ X-Cinode-Signature: ...
 X-Cinode-Company-Id: 123
 X-Cinode-User-Id: 123
 
-{}
+{
+    "filter": {
+        "recipient": {
+            "value": "asdasdasdasdasdas"
+        },
+        "status": {
+            "value": ["new", "completed"]
+        }
+    }
+}
 ```
 
 ```http
@@ -49,6 +58,24 @@ Content-Type: application/json
             "recipient": { "label": "Recipient" },
             "template": { "label": "Template" },
             "status": { "label": "Status" }
+        },
+
+        "filter": {
+            "recipient": {
+                "$type": "input",
+                "label": {"en": "Recipiant name"},
+                "value": "asdasdasdasdasdas"
+            },
+            "status": {
+                "$type": "multiselect",
+                "label": {"en": "Satus"},
+                "values": [
+                    {"key": "new", "label": "New"},
+                    {"key": "completed", "label": "Completed"},
+                    {"key": "removed", "label": "Removed"},
+
+                ]
+            }
         },
 
         // Array or data entry objects
