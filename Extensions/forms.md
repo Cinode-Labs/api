@@ -95,7 +95,6 @@ Used for grouping related `elements` into rows.
 - select
 - radioGroup
 - checkboxes
-- multiselect
 
 #### date, time, and datetime
 
@@ -135,7 +134,7 @@ Used for grouping related `elements` into rows.
 
 ```json
 {
-    "$type": "checkboxes", // or "multiselect"
+    "$type": "checkboxes"
     "values": [
         { "label": "First value", "value": "first-value" },
         { "label": "Second value", "value": "second-value" },
