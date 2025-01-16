@@ -73,7 +73,7 @@ Content-Type: application/json
 
 {
     "data": {
-        // Map of form elements to define filters and facets
+        // Map of form elements to define filters.
         "filter": {
             "recipient": {
                 "$type": "input",
@@ -110,12 +110,18 @@ Content-Type: application/json
         "values": [
             {
                 "recipient": { "value": "Bob Boston" },
-                "template": { "value": "Standard development agreement", "href": "https://example.com/standard-development-agreement" },
+                "template": { 
+                    "value": "https://example.com/standard-development-agreement", 
+                    "renderAs": { "$type": "link", "label": { "en": "Standard development agreement" } }
+                },
                 "status": { "value": "Signed" }
             },
             {
                 "recipient": { "value": "Bob Boston"  },
-                "template": { "value": "Premium maintenance SLA", "href": "https://example.com/premium-maintenance-sla" },
+                "template": { 
+                    "value": "https://example.com/premium-maintenance-sla", 
+                    "renderAs": { "$type": "link", "label": { "en": "Premium maintenance SLA" } }
+                },
                 "status": { "value": "Sent" }
             }
         ]
