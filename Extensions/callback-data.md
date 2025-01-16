@@ -95,7 +95,8 @@ Content-Type: application/json
         },
 
         "pagination": {
-            "$type": "client" // signals the frontend to do client-side pagination. Requires the entire filtered dataset to be returned.
+            "$type": "cursor",
+            "cursor": "next page cursor"
         },
 
         // Map of property names to property metadata
