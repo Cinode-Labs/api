@@ -15,6 +15,33 @@ A table definition defines each column as `properties`, rows as `values`, option
 }
 ```
 
+## Values
+
+```json
+[
+    { "value": "my simple value, displayed as the label" }
+    { "value": "https://example.com", "renderAs": { "$type": "link", "label": { "en": "Example" } } }
+]
+```
+
+## Values renderAs
+
+Specify how the value should be presented. The value will be presented as-is if not specified.
+
+- link
+
+### link
+
+```json
+{
+    "value": "link href", // Value becomes the href
+    "renderAs": {
+        "$type": "link",
+        "label": { "en": "My label" }
+    }
+}
+```
+
 ## Filters
 
 A filter should have its `value` specified in the case of a pre-filtered data set.
@@ -24,7 +51,7 @@ A filter should have its `value` specified in the case of a pre-filtered data se
 
 ### text
 
-```
+```json
 {
     "$type": "text",
     "label": {"en": "Query"},
@@ -54,6 +81,10 @@ Predefined filter values. Multiple values can be selected.
 ```
 
 ## Pagination
+
+Specify the pagination strategy. Shows all data if not specified.
+
+- cursor
 
 ### cursor
 
