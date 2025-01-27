@@ -61,13 +61,13 @@ A filter should have its `value` specified in the case of a pre-filtered data se
 }
 ```
 
-### select
+### multiselect
 
 Predefined filter values. Multiple values can be selected.
 
 ```json
 {
-    "$type": "select",
+    "$type": "multiselect",
     "label": {"en": "Color"},
     "values": [
         { "label": { "en": "Red", }, "value": "red" },
