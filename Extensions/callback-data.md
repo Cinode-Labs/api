@@ -40,7 +40,7 @@ X-Cinode-User-Id: 123
 {}
 ```
 
-Subsequent requests will include a `filters` property with values to filter the returned data.
+Subsequent requests might include `filters` and `pagination` properties.
 
 ```http
 POST /api/data HTTP/1.1
@@ -61,7 +61,11 @@ X-Cinode-User-Id: 123
         "status": {
             "value": ["new", "completed"]
         }
-    }
+    },
+
+    "pagination": {
+        "cursor": "next page cursor"
+    },
 }
 ```
 
@@ -73,7 +77,7 @@ Content-Type: application/json
 
 {
     "data": {
-        // Map of form elements to define filters.
+        // Map of filter elements to define filters.
         "filters": {
             "recipient": {
                 "$type": "input",
@@ -94,6 +98,7 @@ Content-Type: application/json
             }
         },
 
+        // Object describing the pagination strategy. 
         "pagination": {
             "$type": "cursor",
             "cursor": "next page cursor"
