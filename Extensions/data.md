@@ -46,14 +46,14 @@ Specify how the value should be presented. The value will be presented as-is if 
 
 A filter should have its `value` specified in the case of a pre-filtered data set.
 
-- text
+- input
 - multiselect
 
-### text
+### input
 
 ```json
 {
-    "$type": "text",
+    "$type": "input",
     "label": {"en": "Query"},
 
     // Optional

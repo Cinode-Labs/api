@@ -74,7 +74,7 @@ Content-Type: application/json
 {
     "data": {
         // Map of form elements to define filters.
-        "filter": {
+        "filters": {
             "recipient": {
                 "$type": "input",
                 "label": {"en": "Recipiant name"},
