@@ -27,6 +27,8 @@ Invoked when data is requested, i.e., to be displayed in a panel.
 - Respond with a `200 OK` response and a `data` object.
 - Respond with a `400 Bad Request` response to display a general error in place of the panel content.
 
+Initial load will only contain an empty object.
+
 ```http
 POST /api/data HTTP/1.1
 Content-Type: application/vnd.cinode.callback.v1+json
@@ -38,12 +40,73 @@ X-Cinode-User-Id: 123
 {}
 ```
 
+Subsequent requests might include `filters` and `pagination` properties.
+
+```http
+POST /api/data HTTP/1.1
+Content-Type: application/vnd.cinode.callback.v1+json
+Digest: sha-256=...
+X-Cinode-Signature: ...
+X-Cinode-Company-Id: 123
+X-Cinode-User-Id: 123
+
+{
+    "filters": {
+        "recipient": {
+            "value": "asdasdasdasdasdas"
+        },
+        "some-complex-query": {
+            "value": "my query value"
+        },
+        "status": {
+            "value": ["new", "completed"]
+        }
+    },
+
+    "pagination": {
+        "cursor": "next page cursor"
+    },
+}
+```
+
+Response must contain a `properties`, and `values` properties. Optionally a `filters` and/or `pagination` property.
+
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
     "data": {
+        // Map of filter elements to define filters.
+        "filters": {
+            "recipient": {
+                "$type": "text",
+                "label": {"en": "Recipiant name"},
+            },
+            "some-complex-query": {
+                "$type": "text",
+                "label": {"en": "Query"},
+            },
+            "status": {
+                "$type": "multiselect",
+                "label": {"en": "Satus"},
+                "options": {
+                    "$type": "static",
+                    "values": [
+                        {"value": "new", "label": {"en": "New"}},
+                        {"value": "completed", "label": {"en": "Completed"}},
+                        {"value": "removed", "label": {"en": "Removed"}}
+                    ]
+                }
+            }
+        },
+
+        // Object describing the pagination strategy. 
+        "pagination": {
+            "$type": "cursor",
+            "cursor": "next page cursor"
+        },
+
         // Map of property names to property metadata
         "properties": {
             "recipient": { "label": "Recipient" },
@@ -56,12 +119,18 @@ Content-Type: application/json
         "values": [
             {
                 "recipient": { "value": "Bob Boston" },
-                "template": { "value": "Standard development agreement" },
+                "template": { 
+                    "value": "https://example.com/standard-development-agreement", 
+                    "renderAs": { "$type": "link", "label": { "en": "Standard development agreement" } }
+                },
                 "status": { "value": "Signed" }
             },
             {
-                "recipient": { "value": "Bob Boston" },
-                "template": { "value": "Premium maintenance SLA" },
+                "recipient": { "value": "Bob Boston"  },
+                "template": { 
+                    "value": "https://example.com/premium-maintenance-sla", 
+                    "renderAs": { "$type": "link", "label": { "en": "Premium maintenance SLA" } }
+                },
                 "status": { "value": "Sent" }
             }
         ]
