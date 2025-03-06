@@ -46,14 +46,14 @@ Specify how the value should be presented. The value will be presented as-is if 
 
 A filter should have its `value` specified in the case of a pre-filtered data set.
 
-- input
+- text
 - multiselect
 
-### input
+### text
 
 ```json
 {
-    "$type": "input",
+    "$type": "text",
     "label": {"en": "Query"},
 
     // Optional
@@ -69,11 +69,14 @@ Predefined filter values. Multiple values can be selected.
 {
     "$type": "multiselect",
     "label": {"en": "Color"},
-    "values": [
-        { "label": { "en": "Red", }, "value": "red" },
-        { "label": { "en": "Green", }, "value": "green" },
-        { "label": { "en": "Blue", }, "value": "blue" }
-    ],
+    "options": {
+        "$type": "static",
+        "values": [
+            { "label": { "en": "Red", }, "value": "red" },
+            { "label": { "en": "Green", }, "value": "green" },
+            { "label": { "en": "Blue", }, "value": "blue" }
+        ]
+    },
 
     // Optional
     "value": [ "green", "blue" ]
@@ -94,6 +97,6 @@ Cursor based pagination only used a cursor value or a "next page token" to signa
 {
     "$type": "cursor",
 
-    "cusrsor": "some value for next page"
+    "cursor": "some value for next page"
 }
 ```

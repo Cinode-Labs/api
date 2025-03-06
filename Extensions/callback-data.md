@@ -80,21 +80,24 @@ Content-Type: application/json
         // Map of filter elements to define filters.
         "filters": {
             "recipient": {
-                "$type": "input",
+                "$type": "text",
                 "label": {"en": "Recipiant name"},
             },
             "some-complex-query": {
-                "$type": "input",
+                "$type": "text",
                 "label": {"en": "Query"},
             },
             "status": {
                 "$type": "multiselect",
                 "label": {"en": "Satus"},
-                "values": [
-                    {"value": "new", "label": "New"},
-                    {"value": "completed", "label": "Completed"},
-                    {"value": "removed", "label": "Removed"}
-                ]
+                "options": {
+                    "$type": "static",
+                    "values": [
+                        {"value": "new", "label": {"en": "New"}},
+                        {"value": "completed", "label": {"en": "Completed"}},
+                        {"value": "removed", "label": {"en": "Removed"}}
+                    ]
+                }
             }
         },
 
